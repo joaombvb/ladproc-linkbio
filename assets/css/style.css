@@ -1,0 +1,114 @@
+/* === Paleta === */
+:root{
+  --cream: #FEF9E1;           /* creme */
+  --cream-800: #F1EACB;       /* variação sutil */
+  --text: #1a1a1a;
+
+  --primary: #6D2323;         /* vinho principal */
+  --primary-700: #7E2C2C;     /* hover/borda */
+  --primary-900: #3F1414;     /* fundo dos cartões */
+  --border-card: #5A1D1D;     /* borda dos cartões */
+
+  --ring: #EADDB8;            /* foco acessível em cima do vinho */
+  --muted: #7a7266;           /* textos discretos no fundo creme */
+  --muted-on-primary: #EADDB8;/* textos discretos sobre vinho */
+}
+
+/* Reset mínimo */
+*{ box-sizing:border-box; margin:0; padding:0 }
+html,body{ height:100%; width:100% }
+body{
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  display:flex; flex-direction:column; align-items:center;
+  min-height:100vh;
+}
+
+/* Layout principal */
+.wrapper{ width:100%; max-width:680px; padding:32px 20px; flex:1; display:flex; flex-direction:column; justify-content:center }
+
+/* --- LOGO (menor) --- */
+.brand{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin: 8px 0 18px;
+}
+.brand img{
+  /* menor no mobile e controlado no desktop */
+  width: clamp(170px, 42vw, 300px);
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+/* Lista de links */
+.links{ list-style:none; margin:22px 0; padding:0; display:grid; gap:16px }
+
+/* Cartões burgundy (seguindo as referências) */
+.link{ display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:14px;
+  padding:14px; border-radius:16px; text-decoration:none;
+  background: var(--primary-900);
+  border:1px solid var(--border-card);
+  box-shadow: 0 1px 0 rgba(0,0,0,.10), 0 12px 32px -16px rgba(63,20,20,.65);
+  color: #FEF9E1;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.link:hover{ transform: translateY(-2px); box-shadow: 0 6px 22px -10px rgba(63,20,20,.70); border-color: var(--primary-700) }
+.link:focus-visible{ outline:3px solid var(--ring); outline-offset:3px }
+
+/* Ícone à esquerda */
+.ico{ width:44px; height:44px; border-radius:14px; display:grid; place-items:center; flex-shrink:0;
+  background: linear-gradient(135deg, var(--primary), var(--primary)); color:#FEF9E1 }
+.ico svg{ width:22px; height:22px }
+
+/* Textos */
+.label{ font-weight:700; font-size:1rem; color:#FEF9E1 }
+.note{ color: var(--muted-on-primary); font-size:.85rem }
+
+/* Chevron à direita (tamanho fixo) */
+.chev{ color: var(--muted-on-primary) }
+.chev svg{ width:22px; height:22px }
+
+/* Estados do botão de inscrição (sem JS) */
+body.inscricoes-fechadas .link.inscricao{ pointer-events:none; opacity:.7 }
+body.inscricoes-fechadas .link.inscricao .note .status-open{ display:none }
+body.inscricoes-fechadas .link.inscricao .note .status-closed{ display:inline }
+body.inscricoes-abertas .link.inscricao .note .status-open{ display:inline }
+body.inscricoes-abertas .link.inscricao .note .status-closed{ display:none }
+
+/* Rodapé com respiro */
+footer{ margin-top:auto; padding:28px 12px 34px; text-align:center; font-size:.85rem; color:var(--muted); width:100% }
+footer a{ color:inherit }
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px){
+  .wrapper{ padding:28px 16px }
+  .links{ gap:14px }
+  .link{ padding:12px; gap:12px }
+  .ico{ width:40px; height:40px; border-radius:12px }
+  .ico svg{ width:18px; height:18px }
+  .label{ font-size:.98rem }
+  .note{ font-size:.82rem }
+  .chev svg{ width:20px; height:20px }
+}
+@media (max-width: 400px){
+  .link{ grid-template-columns:auto 1fr auto; gap:10px; padding:11px }
+  .ico{ width:36px; height:36px; border-radius:10px }
+  .ico svg{ width:17px; height:17px }
+  .label{ font-size:.95rem }
+  .note{ font-size:.78rem }
+  .chev svg{ width:18px; height:18px }
+}
+/* tablets e acima (continua menor que antes) */
+@media (min-width: 768px){
+  .brand img{
+    width: clamp(200px, 20vw, 340px);
+  }
+}
+
+/* telefones muito estreitos */
+@media (max-width: 400px){
+  .brand{ margin: 6px 0 16px }
+  .brand img{ width: clamp(160px, 60vw, 260px) }
+}
